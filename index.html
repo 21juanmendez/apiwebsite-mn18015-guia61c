@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<title>Ejemplo web api</title>
+	<meta charset="utf-8" />
+	<LINK REL=StyleSheet HREF="estilo.css" TYPE="text/css" MEDIA=screen>
+	<script src="codigo.js"></script>
+</head>
+
+<body>
+	<h1>… Ejemplo web api</h1>
+	<p>… JUAN ERNESTO MENDEZ NERIO (MN18015) …</p>
+	<p>… GUIA 61-B…</p>
+
+	<p><button onclick="obtenerProductos();this.style.display='none';">Obtener Productos</button></p>
+	<div id="listado" style="display:none;">
+		<!-- INICIO FORMULARIO -->
+		<form id="product-form">
+			<label for="image">URL de la imagen:</label>
+			<input type="text" id="image" name="image" required><br><br>
+
+			<label for="price">Precio:</label>
+			<input type="number" id="price" name="price" step="0.01" required><br><br>
+
+			<label for="title">Título:</label>
+			<input type="text" id="title" name="title" required><br><br>
+
+			<label for="category">Categoría:</label>
+			<input type="text" id="category" name="category" required><br><br>
+
+			<label for="description">Descripción:</label>
+			<textarea id="description" name="description" required></textarea><br><br>
+
+			<button type="submit">Agregar Producto</button>
+		</form>
+
+		<script>
+			document.getElementById("product-form").addEventListener("submit", function (event) {
+				event.preventDefault();
+
+				// Obtener los valores de los campos del formulario
+				const image = document.getElementById("image").value;
+				const price = document.getElementById("price").value;
+				const title = document.getElementById("title").value;
+				const category = document.getElementById("category").value;
+				const description = document.getElementById("description").value;
+
+				// Crear un objeto de producto con los valores
+				const producto = {
+					"image": image,
+					"price": price,
+					"title": title,
+					"category": category,
+					"description": description
+				};
+				// Enviar la solicitud para agregar el producto
+				  agregarProducto(producto);
+				  
+				
+			});
+		</script>
+		<!-- FIN FORMULARIO -->
+
+		<form name="filtroprods" id="filtroprods">
+			Seleccione Categorias
+			<input type="checkbox" id="c1" value="c1" checked>Electronicos
+			<input type="checkbox" id="c2" value="c2" checked>Joyería
+			<input type="checkbox" id="c3" value="c3" checked>Ropa Caballero
+			<input type="checkbox" id="c4" value="c4" checked>Ropa Dama
+			<ol>
+				<li>Click en la imagen para Acercamiento</li>
+				<li>Click en precio para ordenar Asc o Desc</li>
+			</ol>
+			<table id="tabla" border="1">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>foto</th>
+						<th id="price">price</th>
+						<th>title</th>
+						<th>description</th>
+						<th>category</th>
+					</tr>
+				</thead>
+				<tbody id="tbody"></tbody>
+			</table>
+		</form>
+	</div>
+</body>
+
+</html>
